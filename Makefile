@@ -14,7 +14,7 @@ $(PRINTF):
 	make -C ft_printf
 
 $(NAME)	:	$(OBJ) $(PRINTF)
-	gcc $(OBJ) -o $(NAME) $(PRINTF)
+	gcc $(OBJ) -o $(NAME) $(PRINTF) -g
 
 %.o		:	%.c
 	gcc -Wall -Werror -Wextra -g -c $< -o $@

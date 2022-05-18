@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/18 14:50:33 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/04/20 14:11:51 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/17 20:37:16 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,7 @@ static	int	count_words(char const *s, char c)
 		while (*s == c && *s)
 			s++;
 		while (*s != c && *s)
-		{
-			if (*s == '\'')
-			{
-				s++;
-				while (*s != '\'' && *s)
-					s++;
-			}
 			s++;
-		}
 		count++;
 	}
 	return (count);
@@ -63,15 +55,7 @@ static	void	write_split(char **strs, char const *s, char c, int wordcount)
 		while (*s == c && *s)
 			s++;
 		while (s[i] != c && s[i])
-		{
-			if (s[i] == '\'')
-			{
-				i++;
-				while (s[i] != '\'' && s[i])
-					i++;
-			}
 			i++;
-		}
 		strs[k] = ft_substr(s, 0, i);
 		if (!strs[k])
 			free_k(strs);

@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/07 18:18:54 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/04/21 13:56:33 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/18 13:50:08 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	close(pipex.tube[1]);
 	waitpid(pipex.pid1, &code, 0);
 	waitpid(pipex.pid2, &code, 0);
-	exit(WEXITSTATUS(code));
+	if (WIFEXITED(code))
+		exit(WEXITSTATUS(code));
+	return (1);
 }
