@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 16:47:26 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/05/18 17:17:23 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/19 21:25:42 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ typedef struct s_pipex
 	int		tube[2];
 }				t_pipex;
 
+//children
 void	child1(char **argv, char **envp, t_pipex *pipex);
 void	child2(char **argv, char **envp, t_pipex *pipex);
+//utils
 void	error(char *message, int code);
+void	free_stuff(char	**free_this, char *free_that);
+void	is_cmd_spaces(char *cmd_arg, char *cmd_err);
 
 #endif

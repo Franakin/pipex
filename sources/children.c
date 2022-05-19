@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:54:28 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/05/19 16:24:29 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/19 21:25:55 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-
-static void	free_stuff(char	**free_this, char *free_that)
-{
-	int	i;
-
-	i = 0;
-	free(free_that);
-	while (free_this[i])
-	{
-		free(free_this[i]);
-		i++;
-	}
-	free(free_this);
-}
 
 static char	*find_path(char **paths, char *cmd, char *cmd_arg, char *cmd_err)
 {
@@ -51,7 +37,7 @@ static char	*find_path(char **paths, char *cmd, char *cmd_arg, char *cmd_err)
 	}
 	if (!*paths)
 	{
-		free_stuff(to_free, cmd_err);
+		free_stuff(to_free, NULL);
 		error(cmd_err, 127);
 	}
 	free_stuff(to_free, cmd_err);
@@ -64,10 +50,13 @@ static char	*get_cmd(char *cmd_arg, char **envp)
 	char	*cmd_err;
 	char	**paths;
 
+	if (!cmd_arg)
+		error("Permission denied", 126);
+	cmd_err = ft_strjoin("Command not found: ", cmd_arg);
+	is_cmd_spaces(cmd_arg, cmd_err);
 	while (ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	paths = pipex_split(*envp, ':');
-	cmd_err = ft_strjoin("Command not found: ", cmd_arg);
 	if (!paths)
 		error(NULL, 1);
 	cmd = NULL;

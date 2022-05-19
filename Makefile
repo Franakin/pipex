@@ -1,6 +1,6 @@
 SRC = children.c\
 main.c\
-error.c\
+utils.c\
 
 SDIR = sources
 
@@ -27,7 +27,7 @@ $(ODIR)/%.o		:	$(SDIR)/%.c
 
 clean	:
 	@rm -f $(OBJ)
-	@rmdir -p objects
+	@rm -rf objects
 	@make clean -C ft_printf
 	@echo "Cleaned"
 
