@@ -16,10 +16,6 @@ all	:	${NAME}
 $(LIBFT):
 	make -C libft
 
-test	:
-	make all
-	gcc ${FLAGS} ${NAME}
-
 ${NAME}	:	${OBJS} $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar -rcsu ${NAME} ${OBJS} 
@@ -33,6 +29,8 @@ fclean	:	clean
 	rm -f ${NAME}
 	rm -f libft/libft.a
 
-re	: fclean all
+re		: fclean all
 
-.PHONY	:	all test clean fclean re
+.PHONY	:	all clean fclean re
+
+.SILENT	:

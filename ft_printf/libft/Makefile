@@ -47,7 +47,6 @@ ft_lstmap_bonus.c\
 
 OBJS    = ${SRCS:.c=.o}
 OBJSBONUS = ${SRCBONUS:.c=.o}
-CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror
 NAME    = libft.a
 
@@ -56,9 +55,6 @@ OBJS += ${OBJSBONUS}
 endif
 
 all     :   ${NAME}
-
-objects :
-	${CC} ${CFLAGS} -c ${SRCS}
 
 ${NAME} :   ${OBJS}
 	ar -rcsu ${NAME} ${OBJS}
@@ -75,3 +71,5 @@ fclean  :   clean
 re      :   fclean all
 
 .PHONY	:	all objects bonus clean fclean re
+
+.SILENT	:

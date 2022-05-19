@@ -6,12 +6,12 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:54:28 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/05/18 13:48:52 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/19 16:24:29 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include "ft_printf/ft_printf.h"
+#include "../ft_printf/libft/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -51,7 +51,7 @@ static char	*find_path(char **paths, char *cmd, char *cmd_arg, char *cmd_err)
 	}
 	if (!*paths)
 	{
-		free(to_free);
+		free_stuff(to_free, cmd_err);
 		error(cmd_err, 127);
 	}
 	free_stuff(to_free, cmd_err);
