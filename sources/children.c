@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:54:28 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/05/19 21:25:55 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/19 21:41:26 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	child1(char **argv, char **envp, t_pipex *pipex)
 	char	**cmd_arg;
 	char	*cmd;
 
+	if (argv[2][0] == ' ')
+		error(ft_strjoin("Command not found: ", argv[2]), 127);
 	pipex->infd = open(argv[1], O_RDONLY);
 	cmd_arg = pipex_split(argv[2], ' ');
 	if (pipex->infd < 0 || !cmd_arg)
@@ -88,6 +90,8 @@ void	child2(char **argv, char **envp, t_pipex *pipex)
 	char	**cmd_arg;
 	char	*cmd;
 
+	if (argv[3][0] == ' ')
+		error(ft_strjoin("Command not found: ", argv[3]), 127);
 	pipex->outfd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	cmd_arg = pipex_split(argv[3], ' ');
 	if (pipex->outfd < 0 || !cmd_arg)
