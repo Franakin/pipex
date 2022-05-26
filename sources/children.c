@@ -6,7 +6,7 @@
 /*   By: fpurdom <fpurdom@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/11 18:54:28 by fpurdom       #+#    #+#                 */
-/*   Updated: 2022/05/19 21:41:26 by fpurdom       ########   odam.nl         */
+/*   Updated: 2022/05/26 19:45:47 by fpurdom       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*get_cmd(char *cmd_arg, char **envp)
 		error("Permission denied", 126);
 	cmd_err = ft_strjoin("Command not found: ", cmd_arg);
 	is_cmd_spaces(cmd_arg, cmd_err);
-	while (ft_strncmp("PATH=", *envp, 5))
+	while (*envp && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	paths = pipex_split(*envp, ':');
 	if (!paths)
@@ -92,11 +92,11 @@ void	child2(char **argv, char **envp, t_pipex *pipex)
 
 	if (argv[3][0] == ' ')
 		error(ft_strjoin("Command not found: ", argv[3]), 127);
-	pipex->outfd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	cmd_arg = pipex_split(argv[3], ' ');
+	cmd = get_cmd(*cmd_arg, envp);
+	pipex->outfd = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipex->outfd < 0 || !cmd_arg)
 		error(NULL, 1);
-	cmd = get_cmd(*cmd_arg, envp);
 	if (dup2(pipex->outfd, 1) == -1)
 		error(NULL, 1);
 	if (close(pipex->tube[1]) == -1)

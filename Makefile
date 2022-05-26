@@ -18,12 +18,12 @@ $(PRINTF):
 	@make -C ft_printf
 
 $(NAME)	:	$(OBJ) $(PRINTF)
-	@gcc $(OBJ) -o $(NAME) $(PRINTF) -g
+	@gcc $(OBJ) -o $(NAME) $(PRINTF) -g -fsanitize=address
 	@echo "Pipex made"
 
 $(ODIR)/%.o		:	$(SDIR)/%.c
 	@mkdir -p objects;
-	@gcc -Wall -Werror -Wextra -g -c $< -o $@
+	@gcc -Wall -Werror -Wextra -g -c $< -o $@ -fsanitize=address
 
 clean	:
 	@rm -f $(OBJ)
